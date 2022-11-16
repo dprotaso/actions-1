@@ -40,8 +40,6 @@ jobs:
       with:
         k8s-version: ${{ matrix.k8s-version }}
         cluster-suffix: ${{ matrix.cluster-suffix }}
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
 
     - name: check domain
       run: |
@@ -65,8 +63,7 @@ jobs:
           fi
         fi
 
-    - name: Test spinning up Knative also
-      id: knative
-      uses: ./setup-knative
-      with:
-        version: latest
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+
