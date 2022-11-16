@@ -45,6 +45,7 @@ jobs:
 
     - name: check domain
       run: |
+        set -x
         expected_value="${{ matrix.cluster-suffix }}"
         dnsDomain=$(docker exec -t kind-control-plane cat /kind/kubeadm.conf | { grep dnsDomain || true; } | awk '{ print $2 }')
 
