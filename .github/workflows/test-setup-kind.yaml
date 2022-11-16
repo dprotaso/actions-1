@@ -45,7 +45,7 @@ jobs:
       run: |
         set -x
         expected_value="${{ matrix.cluster-suffix }}"
-        dnsDomain=$(docker exec -t kind-control-plane cat /kind/kubeadm.conf | { grep dnsDomain || true; } | awk '{ print $2 }')
+        dnsDomain=$(docker exec kind-control-plane cat /kind/kubeadm.conf | { grep dnsDomain || true; } | awk '{ print $2 }')
 
         if [[ "${expected_value}" == "cluster.local" ]]; then
           # the action doesn't explicitly set cluster.local - so we expect an empty value
